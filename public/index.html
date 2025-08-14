@@ -1,23 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Supabase CRUD Realtime</title>
+  <title>Supabase CRUD dengan Error Handling</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="container">
-    <h1>Supabase CRUD + Realtime + Storage</h1>
+    <h1>🚀 Supabase CRUD + Realtime + Storage</h1>
+    
+    <!-- Alert container untuk feedback -->
+    <div id="alertContainer"></div>
 
     <!-- Form tambah -->
     <form id="addForm">
-      <input type="text" id="nama" placeholder="Nama" required>
-      <input type="number" id="umur" placeholder="Umur" required>
-      <input type="file" id="gambar" accept="image/*" required>
-      <button type="submit">Tambah</button>
+      <h3>➕ Tambah Data Baru</h3>
+      
+      <div class="input-group">
+        <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+        <div class="validation-message" id="namaValidation"></div>
+      </div>
+      
+      <div class="input-group">
+        <input type="number" id="umur" placeholder="Masukkan umur" min="1" max="150" required>
+        <div class="validation-message" id="umurValidation"></div>
+      </div>
+      
+      <div class="input-group">
+        <input type="file" id="gambar" accept="image/*" required>
+        <div class="validation-message" id="gambarValidation"></div>
+        <small style="color: #6c757d; margin-top: 5px; display: block;">
+          Format yang didukung: JPG, PNG, GIF. Maksimal 5MB.
+        </small>
+      </div>
+      
+      <button type="submit" id="addSubmitBtn">💾 Tambah Data</button>
     </form>
+
+    <!-- Loading indicator -->
+    <div id="loadingIndicator" style="display: none; text-align: center; padding: 20px;">
+      <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+      <p style="margin-top: 10px; color: #6c757d;">Memuat data...</p>
+    </div>
 
     <!-- List data -->
     <div id="dataList"></div>
@@ -27,19 +53,39 @@
   <div id="editModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>Edit Data</h2>
+      <h2>✏️ Edit Data</h2>
+      
+      <!-- Alert container untuk modal -->
+      <div id="modalAlertContainer"></div>
+      
       <form id="editForm">
         <input type="hidden" id="editId">
-        <input type="text" id="editNama" placeholder="Nama" required>
-        <input type="number" id="editUmur" placeholder="Umur" required>
-        <input type="file" id="editGambar" accept="image/*">
+        
+        <div class="input-group">
+          <input type="text" id="editNama" placeholder="Masukkan nama lengkap" required>
+          <div class="validation-message" id="editNamaValidation"></div>
+        </div>
+        
+        <div class="input-group">
+          <input type="number" id="editUmur" placeholder="Masukkan umur" min="1" max="150" required>
+          <div class="validation-message" id="editUmurValidation"></div>
+        </div>
+        
+        <div class="input-group">
+          <input type="file" id="editGambar" accept="image/*">
+          <div class="validation-message" id="editGambarValidation"></div>
+          <small style="color: #6c757d; margin-top: 5px; display: block;">
+            Biarkan kosong jika tidak ingin mengubah gambar. Format: JPG, PNG, GIF. Maksimal 5MB.
+          </small>
+        </div>
+        
         <div id="currentImage"></div>
-        <button type="submit">Update</button>
+        
+        <button type="submit" id="editSubmitBtn">💾 Update Data</button>
       </form>
     </div>
   </div>
   
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> -->
   <script src="app.js"></script>
 </body>
 </html>
