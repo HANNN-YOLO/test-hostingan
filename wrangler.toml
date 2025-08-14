@@ -2,3 +2,14 @@
 
 name = "test-hostingan"
 compatibility_date = "2025-08-14"
+
+# Tambahkan environment variables untuk Supabase
+[vars]
+# Ganti dengan URL Supabase project Anda
+SUPABASE_URL = "https://lhwicvwatoiafbtgludo.supabase.co"
+
+# Ganti dengan Service Role Key dari Supabase
+SUPABASE_SERVICE_ROLE = "your-service-role-key-here"
+
+# Ganti dengan Anon Key dari Supabase  
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxod2ljdndhdG9pYWZidGdsdWRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNDE0ODQsImV4cCI6MjA3MDYxNzQ4NH0.GAch-_FHbEC7njaMlJizSP0fC_bQLFGooKagxo27N0w"

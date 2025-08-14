@@ -397,3 +397,41 @@ input[type="file"]::-webkit-file-upload-button {
   color: #155724;
   border-left-color: #28a745;
 }
+
+/* Notifikasi styling */
+.error-notification,
+.success-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  z-index: 10000;
+  animation: slideIn 0.3s ease-out;
+  max-width: 400px;
+  word-wrap: break-word;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.error-notification {
+  background-color: #dc3545;
+  border-left: 4px solid #c82333;
+}
+
+.success-notification {
+  background-color: #28a745;
+  border-left: 4px solid #1e7e34;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

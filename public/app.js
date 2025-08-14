@@ -13,14 +13,42 @@ const editModal = document.getElementById("editModal");
 const editForm = document.getElementById("editForm");
 const closeBtn = document.querySelector(".close");
 
-// Fungsi untuk menampilkan pesan error
+// Fungsi untuk menampilkan pesan error dengan styling yang lebih baik
 function showError(message) {
-  alert(`❌ Error: ${message}`);
+  // Hapus notifikasi lama jika ada
+  const existingError = document.querySelector('.error-notification');
+  if (existingError) existingError.remove();
+  
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-notification';
+  errorDiv.innerHTML = `❌ ${message}`;
+  document.body.appendChild(errorDiv);
+  
+  // Hapus otomatis setelah 5 detik
+  setTimeout(() => {
+    if (errorDiv.parentNode) {
+      errorDiv.parentNode.removeChild(errorDiv);
+    }
+  }, 5000);
 }
 
-// Fungsi untuk menampilkan pesan sukses
+// Fungsi untuk menampilkan pesan sukses dengan styling yang lebih baik
 function showSuccess(message) {
-  alert(`✅ ${message}`);
+  // Hapus notifikasi lama jika ada
+  const existingSuccess = document.querySelector('.success-notification');
+  if (existingSuccess) existingSuccess.remove();
+  
+  const successDiv = document.createElement('div');
+  successDiv.className = 'success-notification';
+  successDiv.innerHTML = `✅ ${message}`;
+  document.body.appendChild(successDiv);
+  
+  // Hapus otomatis setelah 3 detik
+  setTimeout(() => {
+    if (successDiv.parentNode) {
+      successDiv.parentNode.removeChild(successDiv);
+    }
+  }, 3000);
 }
 
 // Fungsi validasi input
@@ -150,6 +178,7 @@ editForm.addEventListener("submit", async (e) => {
     const umur = parseInt(document.getElementById("editUmur").value);
     const file = document.getElementById("editGambar").files[0];
     
+    // Ambil gambar profile yang sedang ditampilkan
     let gambar_profile = document.getElementById("editNama").getAttribute("data-current-image");
 
     // Validasi input (file optional untuk edit)

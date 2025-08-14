@@ -7,8 +7,9 @@ export async function onRequestGet(context) {
     // Mengambil data dari tabel 'test_crud'
     const response = await fetch(`${env.SUPABASE_URL}/rest/v1/test_crud?select=*`, {
       headers: {
-        // HANYA GUNAKAN KUNCI TAMU (ANON_KEY) UNTUK MEMBACA DATA
-        'apikey': env.SUPABASE_ANON_KEY
+        // Gunakan Service Role untuk operasi read yang konsisten
+        'apikey': env.SUPABASE_SERVICE_ROLE,
+        'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE}`
       }
     });
 
