@@ -226,7 +226,7 @@
 //   }
 // }
 
-// File: functions/api/select.js (GANTI SEMUA ISI FILE DENGAN KODE INI)
+
 
 export async function onRequestGet(context) {
   try {
