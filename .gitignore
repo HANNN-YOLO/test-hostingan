@@ -1,0 +1,11 @@
+# File: .gitignore
+
+# Abaikan file environment rahasia lokal
+.dev.vars
+
+# Abaikan folder dependensi Node.js
+node_modules/
+
+# Abaikan log error dan file sistem operasi
+npm-debug.log*
+.DS_Store
