@@ -164,6 +164,39 @@
 
 // File: functions/api/select.js (KODE FINAL YANG BENAR)
 
+// export async function onRequestGet(context) {
+//   try {
+//     const { env } = context;
+
+//     // Mengambil data dari tabel 'test_crud'
+//     const response = await fetch(`${env.SUPABASE_URL}/rest/v1/test_crud?select=*`, {
+//       headers: {
+//         'apikey': env.SUPABASE_ANON_KEY, // Menggunakan ANON KEY untuk membaca data
+//         'Authorization': `Bearer ${env.SUPABASE_ANON_KEY}`
+//       }
+//     });
+
+//     if (!response.ok) {
+//       // Jika Supabase mengembalikan eror, lemparkan sebagai eror
+//       const errorText = await response.text();
+//       throw new Error(`Gagal mengambil data dari Supabase: ${errorText}`);
+//     }
+
+//     const data = await response.json();
+
+//     // Kirim data (yang berupa array) kembali ke front-end
+//     return new Response(JSON.stringify(data), {
+//       headers: { 'Content-Type': 'application/json' },
+//     });
+
+//   } catch (error) {
+//     console.error("Error di fungsi select:", error.message);
+//     return new Response(`Error di fungsi select: ${error.message}`, { status: 500 });
+//   }
+// }
+
+// File: functions/api/select.js (KODE FINAL REVISI)
+
 export async function onRequestGet(context) {
   try {
     const { env } = context;
@@ -171,20 +204,18 @@ export async function onRequestGet(context) {
     // Mengambil data dari tabel 'test_crud'
     const response = await fetch(`${env.SUPABASE_URL}/rest/v1/test_crud?select=*`, {
       headers: {
-        'apikey': env.SUPABASE_ANON_KEY, // Menggunakan ANON KEY untuk membaca data
-        'Authorization': `Bearer ${env.SUPABASE_ANON_KEY}`
+        // HANYA GUNAKAN apikey untuk membaca data publik
+        'apikey': env.SUPABASE_ANON_KEY
       }
     });
 
     if (!response.ok) {
-      // Jika Supabase mengembalikan eror, lemparkan sebagai eror
       const errorText = await response.text();
-      throw new Error(`Gagal mengambil data dari Supabase: ${errorText}`);
+      throw new Error(`Gagal mengambil data dari Supabase: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
 
-    // Kirim data (yang berupa array) kembali ke front-end
     return new Response(JSON.stringify(data), {
       headers: { 'Content-Type': 'application/json' },
     });
