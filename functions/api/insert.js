@@ -21,7 +21,7 @@ export async function onRequestPost(context) {
     const res = await fetch(`${env.SUPABASE_URL}/rest/v1/test_crud`, {
       method: "POST",
       headers: {
-        "apikey": env.SUPABASE_SERVICE_ROLE,
+        // "apikey": env.SUPABASE_SERVICE_ROLE,
         "Authorization": `Bearer ${env.SUPABASE_SERVICE_ROLE}`,
         "Content-Type": "application/json",
         "Prefer": "return=representation" // Minta Supabase mengembalikan data yg baru dibuat
